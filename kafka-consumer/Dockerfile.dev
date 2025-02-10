@@ -1,0 +1,26 @@
+# Use an official Node.js runtime as the base image
+FROM node:alpine
+
+# Environment Variable
+ENV NODE_ENV=development
+ENV PORT=5002
+ENV REDIS_URL=redis://localhost:6379
+ENV KAFKA_CLIENT_ID=codex
+ENV KAFKA_BROKERS=localhost:9092
+ENV KAFKA_TOPIC=codex-document
+ENV MONGO_URI=mongodb://127.0.0.1:27017/codex
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Expose the backend port (change if needed)
+EXPOSE 5002
+
+# Command to start the backend server
+CMD ["npm", "run", "dev"]

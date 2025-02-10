@@ -5,7 +5,14 @@
   "main": "index.ts",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "start:prod": "npm run build && node dist/index.js",
+    "docker-build:dev": "docker build -t codex-kc-dev:0.0.1 -f Dockerfile.dev .",
+    "docker-run:dev": "docker run -it -p 5002:5002 --name codex-kc-c-dev -v ./:/app -v node-modules:/app/node_modules codex-kc-dev:0.0.1",
+    "docker-build": "docker build -t codex-kc:0.0.1 -f Dockerfile.prod .",
+    "docker-run": "docker run -it -p 5002:5002 --name codex-kc-c codex-kc:0.0.1"
   },
   "keywords": [],
   "author": "Akash Mane",
